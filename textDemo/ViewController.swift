@@ -27,8 +27,9 @@ class ViewController: UIViewController,UIActionSheetDelegate,UIImagePickerContro
     var lengthRange = 0
     override func viewDidLoad() {
         super.viewDidLoad()
-            self.textview.delegate=self
-            textview.typingAttributes[NSObliquenessAttributeName] = 0
+        self.textview.delegate=self
+        textview.typingAttributes[NSObliquenessAttributeName] = 0
+        self.textview.typingAttributes[NSUnderlineStyleAttributeName] = 0
     }
     /**
     分享功能
@@ -289,10 +290,11 @@ class ViewController: UIViewController,UIActionSheetDelegate,UIImagePickerContro
     /**
     设置下划线
     
-    :param: sender
+    :param: sendersd
     */
     @IBAction func underline(sender: AnyObject) {
-        self.textview.typingAttributes[NSUnderlineStyleAttributeName] =  (NSUnderlineStyle.StyleSingle.hashValue ) == 0 ? 1 : NSUnderlineStyle.StyleSingle.hashValue
+        println(self.textview.typingAttributes[NSUnderlineStyleAttributeName]!)
+        self.textview.typingAttributes[NSUnderlineStyleAttributeName] =  (self.textview.typingAttributes[NSUnderlineStyleAttributeName] as? NSNumber) == 0 ? 1 : 0
     }
     /**
     设置字体，这个字体叫做‘骚气无敌，情根深种’。～～～～～～～
