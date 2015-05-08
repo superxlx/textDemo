@@ -30,6 +30,7 @@ class ViewController: UIViewController,UIActionSheetDelegate,UIImagePickerContro
         self.textview.delegate=self
         textview.typingAttributes[NSObliquenessAttributeName] = 0
         self.textview.typingAttributes[NSUnderlineStyleAttributeName] = 0
+        
     }
     /**
     分享功能
@@ -230,11 +231,22 @@ class ViewController: UIViewController,UIActionSheetDelegate,UIImagePickerContro
 
         var textAttachmentString = NSAttributedString(attachment: textAttachment)
         var countString:Int      = count(self.textview.text) as Int
-        string.insertAttributedString(textAttachmentString, atIndex: countString)
+      //  string.insertAttributedString(textAttachmentString, atIndex: countString)
 
-        textview.attributedText  = string as! NSAttributedString
-        textview = UITextView()
-        self.textview.becomeFirstResponder()
+        string.appendAttributedString(textAttachmentString)
+        
+        var storage = NSTextStorage(attributedString: string)
+        var layoutmanage = NSLayoutManager()
+        var container = NSTextContainer(size: self.textview.frame.size)
+        layoutmanage.addTextContainer(container)
+        storage.addLayoutManager(layoutmanage)
+        layoutmanage.textStorage = storage
+      //  textview.attributedText  = string
+       self.textview.removeFromSuperview()
+        var te=UITextView(frame: self.textview.frame, textContainer: container)
+        self.view.addSubview(te)
+        self.textview=te
+        te.becomeFirstResponder()
         picker.dismissViewControllerAnimated(true, completion: nil)
         
         
