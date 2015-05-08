@@ -232,7 +232,8 @@ class ViewController: UIViewController,UIActionSheetDelegate,UIImagePickerContro
         var countString:Int      = count(self.textview.text) as Int
         string.insertAttributedString(textAttachmentString, atIndex: countString)
 
-        textview.attributedText  = string
+        textview.attributedText  = string as! NSAttributedString
+        textview = UITextView()
         self.textview.becomeFirstResponder()
         picker.dismissViewControllerAnimated(true, completion: nil)
         
@@ -293,7 +294,6 @@ class ViewController: UIViewController,UIActionSheetDelegate,UIImagePickerContro
     :param: sendersd
     */
     @IBAction func underline(sender: AnyObject) {
-        println(self.textview.typingAttributes[NSUnderlineStyleAttributeName]!)
         self.textview.typingAttributes[NSUnderlineStyleAttributeName] =  (self.textview.typingAttributes[NSUnderlineStyleAttributeName] as? NSNumber) == 0 ? 1 : 0
     }
     /**
