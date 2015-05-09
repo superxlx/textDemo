@@ -33,6 +33,7 @@ class ViewController: UIViewController,UIActionSheetDelegate,UIImagePickerContro
         self.textview.delegate=self
         textview.typingAttributes[NSObliquenessAttributeName] = 0
         self.textview.typingAttributes[NSUnderlineStyleAttributeName] = 0
+        
     }
     /**
     分享功能
@@ -224,33 +225,33 @@ class ViewController: UIViewController,UIActionSheetDelegate,UIImagePickerContro
         }
     }
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]){
-        var string               = NSMutableAttributedString(attributedString: self.textview.attributedText)
-        var img                  = info[UIImagePickerControllerEditedImage] as! UIImage
-        img                      = self.scaleImage(img)
+        var string                                                    = NSMutableAttributedString(attributedString: self.textview.attributedText)
+        var img                                                       = info[UIImagePickerControllerEditedImage] as! UIImage
+        img                                                           = self.scaleImage(img)
 
-        var textAttachment       = NSTextAttachment()
-        textAttachment.image     = img
+        var textAttachment                                            = NSTextAttachment()
+        textAttachment.image                                          = img
 
-        var textAttachmentString = NSAttributedString(attachment: textAttachment)
-        var countString:Int      = count(self.textview.text) as Int
+        var textAttachmentString                                      = NSAttributedString(attachment: textAttachment)
+        var countString:Int                                           = count(self.textview.text) as Int
       //  string.insertAttributedString(textAttachmentString, atIndex: countString)
 
         string.appendAttributedString(textAttachmentString)
-        
-        var storage = NSTextStorage(attributedString: string)
-        var layoutmanage = NSLayoutManager()
-        var container = NSTextContainer(size: self.textview.frame.size)
+
+        var storage                                                   = NSTextStorage(attributedString: string)
+        var layoutmanage                                              = NSLayoutManager()
+        var container                                                 = NSTextContainer(size: self.textview.frame.size)
         layoutmanage.addTextContainer(container)
         storage.addLayoutManager(layoutmanage)
-        layoutmanage.textStorage = storage
-        var y = self.textview.contentOffset.y
-        var te=UITextView(frame: self.textview.frame, textContainer: container)
+        layoutmanage.textStorage                                      = storage
+        var y                                                         = self.textview.contentOffset.y
+        var te                                                        = UITextView(frame: self.textview.frame, textContainer: container)
         self.view.addSubview(te)
-        self.textview=te
+        self.textview                                                 = te
         self.textview.setContentOffset(CGPoint(x: 0, y: y), animated: true)
-        textview.typingAttributes[NSObliquenessAttributeName] = 0
+        textview.typingAttributes[NSObliquenessAttributeName]         = 0
         self.textview.typingAttributes[NSUnderlineStyleAttributeName] = 0
-        self.textview.typingAttributes[NSFontAttributeName] = UIFont.systemFontOfSize((CGFloat)(self.fontSize))
+        self.textview.typingAttributes[NSFontAttributeName]           = UIFont.systemFontOfSize((CGFloat)(self.fontSize))
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
     func scaleImage(image:UIImage)->UIImage{
